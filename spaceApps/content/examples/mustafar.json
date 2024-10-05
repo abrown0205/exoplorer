@@ -14,5 +14,6 @@
   "star_radius": 0.0,
   "star_temp": 0,
   "star_metallicity": 0,
-  "picture_path": "../../examples/Mustafar.jpg"
+  "picture_path": "../../examples/Mustafar.jpg",
+  "matched_exoplanet_name": "Kepler-10b"
 }

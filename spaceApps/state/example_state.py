@@ -7,7 +7,6 @@ from spaceApps.state.exoplanet_state import ExoplanetState
 
 
 class ExampleState(rx.State):
-    matched_exoplanet_file: str = ""
     example_data: dict = {
         "name": "",
         "description": "",
@@ -20,7 +19,8 @@ class ExampleState(rx.State):
         "inclination": 0.0,
         "temperature": 0.0,
         "density": 0.0,
-        "picture_path": ""
+        "picture_path": "",
+        "matched_exoplanet_name": ""
     }
 
     def get_example_exoplanet(self, name: str):
@@ -36,9 +36,10 @@ class ExampleState(rx.State):
         self.example_data["semimajor_axis"] = data["semimajor_axis"]
         self.example_data["temperature"] = data["temperature"]
         self.example_data["picture_path"] = data["picture_path"]
+        self.example_data["matched_exoplanet_name"] = data["matched_exoplanet_name"]
 
         yield NavState.set_back(GENERATE_ROUTE)
-        yield  ExoplanetState.get_exoplanet()
+        yield ExoplanetState.get_example_exoplanet(self.example_data["matched_exoplanet_name"])
         yield NavState.to_example_planet()
 
     @rx.var

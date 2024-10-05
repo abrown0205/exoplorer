@@ -107,8 +107,6 @@ def find_similar_exoplanet(questions, selectedAnswers):
 
     data = {}
     data["name"] = most_similar_planet['pl_name']
-    data[
-        "description"] = "Proxima Centauri b is an exoplanet orbiting the red dwarf star Proxima Centauri, which is the closest star to our solar system, located about 4.24 light-years away. It is a rocky planet, with a mass roughly 1.17 times that of Earth, and it resides in its star's habitable zone, where temperatures may allow for liquid water. The planet orbits very close to its star, completing a full orbit in just 11.2 Earth days. However, due to Proxima Centauri's frequent stellar flares, the conditions on Proxima b might be harsh for life as we know it"
     data["host_star"] = most_similar_planet['hostname']
     data["discovery_method"] = most_similar_planet['discoverymethod']
     data["discovery_year"] = int(most_similar_planet['disc_year'])
@@ -126,7 +124,32 @@ def find_similar_exoplanet(questions, selectedAnswers):
     data["star_radius"] = float(most_similar_planet['st_rad'])
     data["star_temp"] = float(most_similar_planet['st_teff'])
     data["star_metallicity"] = float(most_similar_planet['st_met'])
-    data["picture_path"] = "../../real_exoplanet.jpeg"
+
+    return data
+
+def find_exoplanet_by_name(name:str):
+    matched_planet = (df[df['pl_name'] == "11 Com b"]).to_dict
+    print(matched_planet)
+
+    data = {}
+    data["name"] = matched_planet['pl_name']
+    data["host_star"] = matched_planet['hostname']
+    data["discovery_method"] = matched_planet['discoverymethod']
+    data["discovery_year"] = matched_planet['disc_year']
+    data["discovery_facility"] = matched_planet['disc_facility']
+    data["distance"] = float(matched_planet['sy_dist'])
+    data["mass"] = float(matched_planet['pl_bmassj'])
+    data["radius"] = float(matched_planet['pl_rade'])
+    data["orbital_period"] = float(matched_planet['pl_orbper'])
+    data["semimajor_axis"] = float(matched_planet['pl_orbsmax'])
+    data["eccentricity"] = float(matched_planet['pl_orbeccen'])
+    data["inclination"] = float(matched_planet['pl_orbincl'])
+    data["temperature"] = float(matched_planet['pl_eqt'])
+    data["density"] = float(matched_planet['pl_dens'])
+    data["star_mass"] = float(matched_planet['st_mass'])
+    data["star_radius"] = float(matched_planet['st_rad'])
+    data["star_temp"] = float(matched_planet['st_teff'])
+    data["star_metallicity"] = float(matched_planet['st_met'])
 
     return data
 

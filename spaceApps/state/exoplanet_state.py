@@ -1,8 +1,8 @@
 import reflex as rx
 
-from spaceApps.backend.exoplanets import find_similar_exoplanet
+from spaceApps.backend.exoplanets import find_similar_exoplanet, find_exoplanet_by_name
 from spaceApps.navigation import NavState
-from spaceApps.navigation.routes import MY_EXO_ROUTE, EXPLORE_ROUTE, HOME_ROUTE, QUIZ_ROUTE, GENERATE_ROUTE
+from spaceApps.navigation.routes import EXPLORE_ROUTE, QUIZ_ROUTE, GENERATE_ROUTE
 
 CONVERT_TO_LY = 3.26156
 
@@ -29,7 +29,27 @@ class ExoplanetState(rx.State):
         "star_radius": 0.0,
         "star_temp": 0.0,
         "star_metallicity": 0.0,
-        "picture_path": ""
+    }
+    matched_exoplanet: dict = {
+        "name": "",
+        "description": "",
+        "host_star": "",
+        "discovery_method": "",
+        "discovery_year": "",
+        "discovery_facility": "",
+        "distance": 0.0,
+        "mass": 0.0,
+        "radius": 0.0,
+        "orbital_period": 0.0,
+        "semimajor_axis": 0.0,
+        "eccentricity": 0.0,
+        "inclination": 0.0,
+        "temperature": 0.0,
+        "density": 0.0,
+        "star_mass": 0.0,
+        "star_radius": 0.0,
+        "star_temp": 0.0,
+        "star_metallicity": 0.0,
     }
 
     def set_questions_and_answers(self, questions:dict, answers:dict):
@@ -57,15 +77,19 @@ class ExoplanetState(rx.State):
         self.current_exoplanet["star_radius"] = data["star_radius"]
         self.current_exoplanet["star_temp"] = data["star_temp"]
         self.current_exoplanet["star_metallicity"] = data["star_metallicity"]
-        self.current_exoplanet["picture_path"] = data["picture_path"]
+        self.matched_exoplanet = self.current_exoplanet
         if self.router.page.path == QUIZ_ROUTE:
             yield NavState.set_back(GENERATE_ROUTE)
         else:
             yield NavState.set_current_as_back()
 
-    def set_exoplanet(self, data):
+    def load_matched_exoplanet(self):
+        self.current_exoplanet = self.matched_exoplanet
+
+    def get_example_exoplanet(self, exoplanet_name:str):
+        data = find_exoplanet_by_name(exoplanet_name)
         self.current_exoplanet["name"] = data["name"]
-        self.current_exoplanet["description"] = data["description"]
+        # self.current_exoplanet["description"] = data["description"]
         self.current_exoplanet["host_star"] = data["host_star"]
         self.current_exoplanet["discovery_method"] = data["discovery_method"]
         self.current_exoplanet["discovery_year"] = data["discovery_year"]
@@ -83,13 +107,7 @@ class ExoplanetState(rx.State):
         self.current_exoplanet["star_radius"] = data["star_radius"]
         self.current_exoplanet["star_temp"] = data["star_temp"]
         self.current_exoplanet["star_metallicity"] = data["star_metallicity"]
-        self.current_exoplanet["picture_path"] = data["picture_path"]
-        if self.router.page.path == QUIZ_ROUTE:
-            yield NavState.set_back(GENERATE_ROUTE)
-        else:
-            yield NavState.set_current_as_back()
-
-
+        yield NavState.set_current_as_back()
 
     @rx.var
     def get_exoplanet_data(self) -> list[list[str]]:

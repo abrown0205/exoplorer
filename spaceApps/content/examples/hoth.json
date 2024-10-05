@@ -14,5 +14,6 @@
   "star_radius": 0.0,
   "star_temp": 0,
   "star_metallicity": 0,
-  "picture_path": "../../examples/Hoth.jpg"
+  "picture_path": "../../examples/Hoth.jpg",
+  "matched_exoplanet_name": "OGLE-2005-BLG-390"
 }

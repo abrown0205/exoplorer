@@ -72,7 +72,8 @@ class State(rx.State):
 
     @rx.var
     def get_question_max(self) -> float:
-        return self.questions[str(self.curQuestionNum)]["answers"][1]
+        if len(self.questions[str(self.curQuestionNum)]["answers"]) > 1:
+            return self.questions[str(self.curQuestionNum)]["answers"][1]
 
     
     @rx.var    
