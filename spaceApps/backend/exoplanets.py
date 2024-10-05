@@ -8,57 +8,76 @@ from openai import OpenAI
 df = pd.read_csv("./exoplanet_data.csv")
 
 def generate_exoplanet(questions, selectedAnswers):
-    # color = "blue"
-    # size = 10
-    #
-    # for question in questions:
-    #     if questions[question]["answers"] == ["blue", "green", "purple", "red", "pink"]:
-    #         color = selectedAnswers[int(question)]
-    #     if questions[question]["answers"] == ["pl_rade"]:
-    #         size = selectedAnswers[int(question)]
-    #
-    # prompt = f'Generate an image of an exoplanet that is {color} color and {size} times the size of earth. Show only the planet in empty space.'
-    #
-    # load_dotenv()
-    #
-    # key = os.getenv('OPENAI_API_KEY')
-    # client = OpenAI(api_key=key)
-    #
-    # response = client.images.generate(
-    #     model="dall-e-2",
-    #     prompt=prompt,
-    #     size="1024x1024",
-    #     quality="standard",
-    #     n=1,
-    # )
-    # image_url = response.data[0].url
-    file_path = os.path.abspath("spaceApps/content/test_exoplanet.json")
-    with open(file_path, 'r') as file:
-        return json.load(file)
-    # data = {}
-    # data["picture_path"] = image_url
-    # return data
+    generated_data = {}
 
-def save_exoplanet(exo_data: dict):
-    file_path = os.path.abspath("spaceApps/content/generated_exoplanet.json")
-    json_object = json.dumps(exo_data, indent=4)
-    with open(file_path, 'w') as outfile:
-        outfile.write(json_object)
+    for question in questions:
+        print(question)
+        if questions[question]["meaning"] == "terrain":
+            generated_data["terrain"] = selectedAnswers[question]
+        elif questions[question]["meaning"] == "color":
+            generated_data["color"] = selectedAnswers[question]
+        elif questions[question]["meaning"] == "pl_eqt":
+            generated_data["temperature"] = selectedAnswers[question][0]
+        elif questions[question]["meaning"] == "pl_rade":
+            generated_data["radius"] = selectedAnswers[question][0]
+        elif questions[question]["meaning"] == "pl_orbsmax":
+            generated_data["semimajor_axis"] = selectedAnswers[question][0]
+        elif questions[question]["meaning"] == "pl_orbper":
+            generated_data["orbital_period"] = selectedAnswers[question][0]
+    print(generated_data)
+    image_prompt = f'Generate an image of a {generated_data["terrain"]} exoplanet that is {generated_data["color"]} color and {generated_data["radius"]} times the size of earth. Show only the planet in empty space.'
 
-def get_saved_exoplanet():
-    file_path = os.path.abspath("spaceApps/content/generated_exoplanet.json")
-    with open(file_path, 'r') as file:
-        try:
-            return json.load(file)
-        except JSONDecodeError:
-            print("Couldn't load saved exoplanet")
+    description_prompt = f'Create a 5 sentence summary of an exoplanet that is a {generated_data["color"]} {generated_data["terrain"]}. \
+                          This exoplanet is {generated_data["radius"]} times the size of Earth. The average temperature of this planet is {generated_data["temperature"]} Kelvin.\
+                           With a distance of {generated_data["semimajor_axis"]} AU from it\'s star, it takes this planet {generated_data["orbital_period"]} Earth days to orbit around the star. \
+                           Do not create a name for the exoplanet. Use "{{name}}" where a name would be referenced. Start the description with "{{name}} is a".  Put this description, as well as an estimate for the planet\'s distance from Earth, density, \
+                           and mass in a json format. Only respond with the json. Do not include units. Your json should match this format:\
+                            {{"description": , "distance": , "density": , "mass": }}'
+
+    load_dotenv()
+
+    key = os.getenv('OPENAI_API_KEY')
+    client = OpenAI(api_key=key)
+
+    image_response = client.images.generate(
+        model="dall-e-2",
+        prompt=image_prompt,
+        size="1024x1024",
+        quality="standard",
+        n=1,
+    )
+
+    text_response = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": description_prompt
+            }
+        ],
+        model="gpt-4o-mini",
+    )
+    response_content = text_response.choices[0].message.content
+    response_content = response_content.strip().splitlines()[1:-1]
+    response_content = '\n'.join(response_content)
+    data_dict = json.loads(response_content)
+
+    generated_data["description"] = data_dict["description"]
+    generated_data["mass"] = data_dict["mass"]
+    generated_data["distance"] = data_dict["distance"]
+    generated_data["density"] = data_dict["density"]
+
+
+    generated_data["picture_path"] = image_response.data[0].url
+    # generated_data["picture_path"] = "../../test_exoplanet.jpeg"
+
+    return generated_data
 
 def find_similar_exoplanet(questions, selectedAnswers):
     input_dict = {}
 
     for question in questions:
         if questions[question]["type"] == "slider":
-            col_name = questions[question]["answers"][0]
+            col_name = questions[question]["meaning"]
             input_dict[col_name] = selectedAnswers[question]
 
     filtered_data = df[input_dict.keys()].copy()
@@ -110,34 +129,6 @@ def find_similar_exoplanet(questions, selectedAnswers):
     data["picture_path"] = "../../real_exoplanet.jpeg"
 
     return data
-
-    # data = {}
-    # data["name"] = "Proxima Centauri b"
-    # data["description"] = "Proxima Centauri b is an exoplanet orbiting the red dwarf star Proxima Centauri, which is the closest star to our solar system, located about 4.24 light-years away. It is a rocky planet, with a mass roughly 1.17 times that of Earth, and it resides in its star's habitable zone, where temperatures may allow for liquid water. The planet orbits very close to its star, completing a full orbit in just 11.2 Earth days. However, due to Proxima Centauri's frequent stellar flares, the conditions on Proxima b might be harsh for life as we know it"
-    # data["host_star"] = "Proxima Centauri"
-    # data["discovery_method"]= "Radial Velocity"
-    # data["discovery_year"]= 2016
-    # data["discovery_facility"]= "European Southern Observatory (ESO) using HARPS and UVES instruments"
-    # data["distance"]= 4.24
-    # data["mass"]= 1.17
-    # data["radius"]= 1.1
-    # data["orbital_period"]= 11.2
-    # data["semimajor_axis"]= 0.0485
-    # data["eccentricity"]= 0.0
-    # data["inclination"]= 0.0
-    # data["temperature"]= 234
-    # data["density"]= 0.0
-    # data["star_mass"]= 0.12
-    # data["star_radius"]= 0.14
-    # data["star_temp"]= 3050
-    # data["star_metallicity"]= -0.01
-    # data["picture_path"]= "../../real_exoplanet.jpeg"
-
-    # return data
-
-    # file_path = os.path.abspath("spaceApps/content/real_exoplanet2.json")
-    # with open(file_path, 'r') as file:
-    #     return json.load(file)
 
 def get_example_exoplanet(name: str):
     file_path = os.path.abspath(f"spaceApps/content/examples/{name}.json")

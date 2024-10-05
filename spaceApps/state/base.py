@@ -8,12 +8,10 @@ from .generate_state import GenerateState
 
 df = pd.read_csv("./exoplanet_data.csv")
 
-class JSONData(rx.Base):
-    data: dict
 
 class State(rx.State):
     """The app state."""
-    questions: JSONData = JSONData(data={})
+    questions: dict = {}
     curQuestionNum: int = 0
     selectedAnswers: dict = {}
 
@@ -24,22 +22,17 @@ class State(rx.State):
         with open(file_path, 'r') as file:
             data = json.load(file)
 
-        self.questions = JSONData(data=data)
+        self.questions = data
 
     @rx.var
     def max_question_num(self) -> int:
-        return len(self.questions.data) - 1
+        return len(self.questions) - 1
 
     def increment_question_number(self):
         if self.curQuestionNum < self.max_question_num:
             self.curQuestionNum += 1
         else:
             self.curQuestionNum = self.max_question_num
-        
-        # if self.questions.data[str(self.curQuestionNum)]["type"] == "slider":
-        #     self.currMc = False
-        # else:
-        #     self.currMc = True
 
 
     def decrement_question_number(self):
@@ -49,40 +42,59 @@ class State(rx.State):
             self.curQuestionNum = 1
 
     @rx.var
-    def get_next_question(self) -> str:
-        if len(self.questions.data) > 0:
-            return self.questions.data[str(self.curQuestionNum)]["question"]
+    def get_cur_question(self) -> str:
+        if len(self.questions) > 0:
+            return self.questions[str(self.curQuestionNum)]["question"]
 
     @rx.var
-    def get_next_answers(self) -> list:
-        if len(self.questions.data) > 0:
-            return self.questions.data[str(self.curQuestionNum)]["answers"]
+    def get_cur_answers(self) -> list[str]:
+        if len(self.questions) > 0:
+            return self.questions[str(self.curQuestionNum)]["answers"]
 
     @rx.var
-    def get_next_type(self) -> str:
-        if len(self.questions.data) > 0:
-            return self.questions.data[str(self.curQuestionNum)]["type"]
+    def get_cur_meaning(self) -> str:
+        if len(self.questions) > 0:
+                return self.questions[str(self.curQuestionNum)]["meaning"]
+
+    @rx.var
+    def get_cur_type(self) -> str:
+        if len(self.questions) > 0:
+            return self.questions[str(self.curQuestionNum)]["type"]
+
+    @rx.var
+    def get_cur_unit(self) -> str:
+        if len(self.questions) > 0:
+            return self.questions[str(self.curQuestionNum)]["unit"]
+
+    @rx.var
+    def get_question_min(self) -> float:
+        return self.questions[str(self.curQuestionNum)]["answers"][0]
+
+    @rx.var
+    def get_question_max(self) -> float:
+        return self.questions[str(self.curQuestionNum)]["answers"][1]
+
     
     @rx.var    
     def getMin(self) -> int:
-        if len(self.questions.data) > 0:
-            if self.questions.data[str(self.curQuestionNum)]["type"] == "slider":
-                return math.floor(df[self.questions.data[str(self.curQuestionNum)]["answers"]].min())
+        if len(self.questions) > 0:
+            if self.questions[str(self.curQuestionNum)]["type"] == "slider":
+                return math.floor(df[self.questions[str(self.curQuestionNum)]["meaning"]].min())
     
     @rx.var
     def getMax(self) -> int:
-        if len(self.questions.data) > 0:
-            if self.questions.data[str(self.curQuestionNum)]["type"] == "slider":
-                if self.questions.data[str(self.curQuestionNum)]["answers"][0] == "pl_orbper":
+        if len(self.questions) > 0:
+            if self.questions[str(self.curQuestionNum)]["type"] == "slider":
+                if self.questions[str(self.curQuestionNum)]["answers"][0] == "pl_orbper":
                     return 2000000
                 else:
-                    return math.ceil(df[self.questions.data[str(self.curQuestionNum)]["answers"]].max())
+                    return math.ceil(df[self.questions[str(self.curQuestionNum)]["meaning"]].max())
             
     @rx.var
     def getSelectedAnswer(self) -> int:
-        if self.questions.data[str(self.curQuestionNum)]["type"] == "slider":
+        if self.questions[str(self.curQuestionNum)]["type"] == "slider":
             if self.curQuestionNum not in self.selectedAnswers:
-                return math.floor(df[self.questions.data[str(self.curQuestionNum)]["answers"]].min())
+                return math.floor(df[self.questions[str(self.curQuestionNum)]["meaning"]].min())
             else:
                 return self.selectedAnswers[self.curQuestionNum]
 
@@ -94,7 +106,7 @@ class State(rx.State):
     def handle_submit(self):
         print(self.selectedAnswers)
 
-        yield GenerateState.set_questions_and_answers(self.questions.data, self.selectedAnswers)
+        yield GenerateState.set_questions_and_answers(self.questions, self.selectedAnswers)
 
         self.curQuestionNum = 0
         self.selectedAnswers = {}

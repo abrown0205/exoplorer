@@ -1,26 +1,46 @@
 {
   "0": {
-    "question": "How large would you like your exoplanet to be?",
-    "type": "slider",
-    "answers": ["pl_rade"],
-    "meaning": ["what", "each", "answer", "means"]
+    "question": "What is the terrain of your exoplanet?",
+    "type": "mc",
+    "answers": ["Gas Giant", "Super Earth", "Ice Ball", "Lava Landscape"],
+    "meaning": "terrain",
+    "unit": ""
   },
   "1": {
-    "question": "What color would you like your exoplanet to be?",
+    "question": "What color is your exoplanet?",
     "type": "mc",
-    "answers": ["blue", "green", "purple", "red", "pink"],
-    "meaning": ["what", "each", "answer", "means"]
+    "answers": ["Red", "Yellow", "Green", "Blue", "Pink"],
+    "meaning": "color",
+    "unit": ""
   },
   "2": {
-    "question": "How far away is your planet from its star?",
+    "question": "What is the average surface temperature of your exoplanet?",
     "type": "slider",
-    "answers": ["pl_orbsmax"],
-    "meaning": ["what", "each", "answer", "means"]
+    "answers": [-200, 3000],
+    "meaning": "pl_eqt",
+    "unit": "Kelvin"
   },
   "3": {
-    "question": "What do you want the orbital period of your planet to be?",
+    "question": "How large is your exoplanet compared to Earth?",
     "type": "slider",
-    "answers": ["pl_orbper"],
-    "meaning": ["what", "each", "answer", "means"]
+    "answers": [0, 90],
+    "meaning": "pl_rade",
+    "unit": "Earth radii"
+  },
+  "4": {
+    "question": "What is the distance of your exoplanet from its star?",
+    "type": "slider",
+    "answers": [0.1, 100],
+    "meaning": "pl_orbsmax",
+    "unit": "Astronomical Units"
+  },
+  "5": {
+    "question": "How long will it take your exoplanet to orbit its star?",
+    "type": "slider",
+    "answers": [0.1, 10000],
+    "meaning": "pl_orbper",
+    "unit": "Earth days"
   }
+
+
 }

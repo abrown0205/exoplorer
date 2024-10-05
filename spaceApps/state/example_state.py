@@ -1,10 +1,8 @@
 import reflex as rx
 
-from spaceApps.backend import generate_exoplanet
-from spaceApps.backend.exoplanets import find_similar_exoplanet, get_example_exoplanet, save_exoplanet, \
-    get_saved_exoplanet
+from spaceApps.backend.exoplanets import get_example_exoplanet
 from spaceApps.navigation import NavState
-from spaceApps.navigation.routes import EXAMPLES_ROUTE, HOME_ROUTE, GENERATE_ROUTE
+from spaceApps.navigation.routes import GENERATE_ROUTE
 from spaceApps.state.exoplanet_state import ExoplanetState
 
 

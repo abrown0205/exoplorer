@@ -1,6 +1,5 @@
 import reflex as rx
 
-from ..backend.exoplanets import get_saved_exoplanet
 from ..components import base_page
 from ..navigation.routes import MY_EXO_ROUTE, QUIZ_ROUTE, EXAMPLES_ROUTE
 from ..state import GenerateState
