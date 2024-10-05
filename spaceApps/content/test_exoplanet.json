@@ -13,5 +13,6 @@
   "star_mass": 0.31,
   "star_radius": 0.29,
   "star_temp": 3480,
-  "star_metallicity": -0.33
+  "star_metallicity": -0.33,
+  "picture_path": "../../test_exoplanet.jpeg"
 }

@@ -32,6 +32,10 @@ class ExoplanetState(rx.State):
         "picture_path": ""
     }
 
+    def set_questions_and_answers(self, questions:dict, answers:dict):
+        self.questions = questions
+        self.selectedAnswers = answers
+
     def get_exoplanet(self):
         data = find_similar_exoplanet(self.questions, self.selectedAnswers)
         self.current_exoplanet["name"] = data["name"]

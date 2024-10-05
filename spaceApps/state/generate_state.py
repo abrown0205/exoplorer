@@ -34,28 +34,30 @@ class GenerateState(rx.State):
         "picture_path": ""
     }
 
-    def get_generated_exoplanet(self):
+    def set_questions_and_answers(self, questions:dict, answers:dict):
+        self.questions = questions
+        self.selectedAnswers = answers
 
-        ExoplanetState.questions = self.questions
-        ExoplanetState.selectedAnswers  = self.selectedAnswers
+    def get_generated_exoplanet(self):
+        yield ExoplanetState.set_questions_and_answers(self.questions, self.selectedAnswers)
         data = generate_exoplanet(self.questions, self.selectedAnswers)
-        # self.generated_name = data["name"]
-        # self.generated_data["description"] = data["description"]
-        # self.generated_data["distance"] = data["distance"]
-        # self.generated_data["mass"] = data["mass"]
-        # self.generated_data["radius"] = data["radius"]
-        # self.generated_data["semimajor_axis"] = data["semimajor_axis"]
-        # self.generated_data["orbital_period"] = data["orbital_period"]
-        # self.generated_data["distance"] = data["distance"]
-        # self.generated_data["semimajor_axis"] = data["semimajor_axis"]
-        # self.generated_data["eccentricity"] = data["eccentricity"]
-        # self.generated_data["inclination"] = data["inclination"]
-        # self.generated_data["temperature"] = data["temperature"]
-        # self.generated_data["density"] = data["density"]
-        # self.generated_data["star_mass"] = data["star_mass"]
-        # self.generated_data["star_radius"] = data["star_radius"]
-        # self.generated_data["star_temp"] = data["star_temp"]
-        # self.generated_data["star_metallicity"] = data["star_metallicity"]
+        self.generated_name = data["name"]
+        self.generated_data["description"] = data["description"]
+        self.generated_data["distance"] = data["distance"]
+        self.generated_data["mass"] = data["mass"]
+        self.generated_data["radius"] = data["radius"]
+        self.generated_data["semimajor_axis"] = data["semimajor_axis"]
+        self.generated_data["orbital_period"] = data["orbital_period"]
+        self.generated_data["distance"] = data["distance"]
+        self.generated_data["semimajor_axis"] = data["semimajor_axis"]
+        self.generated_data["eccentricity"] = data["eccentricity"]
+        self.generated_data["inclination"] = data["inclination"]
+        self.generated_data["temperature"] = data["temperature"]
+        self.generated_data["density"] = data["density"]
+        self.generated_data["star_mass"] = data["star_mass"]
+        self.generated_data["star_radius"] = data["star_radius"]
+        self.generated_data["star_temp"] = data["star_temp"]
+        self.generated_data["star_metallicity"] = data["star_metallicity"]
         self.generated_data["picture_path"] = data["picture_path"]
 
         yield NavState.set_back(GENERATE_ROUTE)

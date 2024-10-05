@@ -8,37 +8,36 @@ from openai import OpenAI
 df = pd.read_csv("./exoplanet_data.csv")
 
 def generate_exoplanet(questions, selectedAnswers):
-    print("test")
-    color = "blue"
-    size = 10
-
-    for question in questions:
-        if questions[question]["answers"] == ["blue", "green", "purple", "red", "pink"]:
-            color = selectedAnswers[int(question)]
-        if questions[question]["answers"] == ["pl_rade"]:
-            size = selectedAnswers[int(question)]
-
-    prompt = f'Generate an image of an exoplanet that is {color} color and {size} times the size of earth. Show only the planet in empty space.'
-
-    load_dotenv()
-
-    key = os.getenv('OPENAI_API_KEY')
-    client = OpenAI(api_key=key)
-
-    response = client.images.generate(
-        model="dall-e-2",
-        prompt=prompt,
-        size="1024x1024",
-        quality="standard",
-        n=1,
-    )
-    image_url = response.data[0].url
-    # file_path = os.path.abspath("spaceApps/content/test_exoplanet.json")
-    # with open(file_path, 'r') as file:
-    #     data = json.load(file)
-    data = {}
-    data["picture_path"] = image_url
-    return data
+    # color = "blue"
+    # size = 10
+    #
+    # for question in questions:
+    #     if questions[question]["answers"] == ["blue", "green", "purple", "red", "pink"]:
+    #         color = selectedAnswers[int(question)]
+    #     if questions[question]["answers"] == ["pl_rade"]:
+    #         size = selectedAnswers[int(question)]
+    #
+    # prompt = f'Generate an image of an exoplanet that is {color} color and {size} times the size of earth. Show only the planet in empty space.'
+    #
+    # load_dotenv()
+    #
+    # key = os.getenv('OPENAI_API_KEY')
+    # client = OpenAI(api_key=key)
+    #
+    # response = client.images.generate(
+    #     model="dall-e-2",
+    #     prompt=prompt,
+    #     size="1024x1024",
+    #     quality="standard",
+    #     n=1,
+    # )
+    # image_url = response.data[0].url
+    file_path = os.path.abspath("spaceApps/content/test_exoplanet.json")
+    with open(file_path, 'r') as file:
+        return json.load(file)
+    # data = {}
+    # data["picture_path"] = image_url
+    # return data
 
 def save_exoplanet(exo_data: dict):
     file_path = os.path.abspath("spaceApps/content/generated_exoplanet.json")
@@ -60,7 +59,7 @@ def find_similar_exoplanet(questions, selectedAnswers):
     for question in questions:
         if questions[question]["type"] == "slider":
             col_name = questions[question]["answers"][0]
-            input_dict[col_name] = selectedAnswers[int(question)]
+            input_dict[col_name] = selectedAnswers[question]
 
     filtered_data = df[input_dict.keys()].copy()
     normalized_data = (filtered_data - filtered_data.min()) / (filtered_data.max() - filtered_data.min())
