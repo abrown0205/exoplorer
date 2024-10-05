@@ -1,0 +1,22 @@
+{
+  "name": "Proxima Centauri b",
+  "description": "Proxima Centauri b is an exoplanet orbiting the red dwarf star Proxima Centauri, which is the closest star to our solar system, located about 4.24 light-years away. It is a rocky planet, with a mass roughly 1.17 times that of Earth, and it resides in its star's habitable zone, where temperatures may allow for liquid water. The planet orbits very close to its star, completing a full orbit in just 11.2 Earth days. However, due to Proxima Centauri's frequent stellar flares, the conditions on Proxima b might be harsh for life as we know it",
+  "host_star": "Proxima Centauri",
+  "discovery_method": "Radial Velocity",
+  "discovery_year": 2016,
+  "discovery_facility": "European Southern Observatory (ESO) using HARPS and UVES instruments",
+  "distance": 4.24,
+  "mass": 1.17,
+  "radius": 1.1,
+  "orbital_period": 11.2,
+  "semimajor_axis": 0.0485,
+  "eccentricity": 0.0,
+  "inclination": 0.0,
+  "temperature": 234,
+  "density": 0.0,
+  "star_mass": 0.12,
+  "star_radius": 0.14,
+  "star_temp": 3050,
+  "star_metallicity": -0.01,
+  "picture_path": "../../real_exoplanet.jpeg"
+}

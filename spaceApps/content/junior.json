@@ -1,0 +1,20 @@
+{
+  "0": {
+    "question": "junior question1",
+    "type": "mc",
+    "answers": ["a", "b", "c", "d"],
+    "meaning": ["what", "each", "answer", "means"]
+  },
+  "1": {
+    "question": "junior question2",
+    "type": "mc",
+    "answers": ["e", "f", "g", "h"],
+    "meaning": ["what", "each", "answer", "means"]
+  },
+  "2": {
+    "question": "junior question3",
+    "type": "mc",
+    "answers": ["i", "j", "k", "l"],
+    "meaning": ["what", "each", "answer", "means"]
+  }
+}

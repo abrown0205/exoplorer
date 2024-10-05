@@ -1,0 +1,26 @@
+{
+  "0": {
+    "question": "How large would you like your exoplanet to be?",
+    "type": "slider",
+    "answers": ["pl_rade"],
+    "meaning": ["what", "each", "answer", "means"]
+  },
+  "1": {
+    "question": "What color would you like your exoplanet to be?",
+    "type": "mc",
+    "answers": ["blue", "green", "purple", "red", "pink"],
+    "meaning": ["what", "each", "answer", "means"]
+  },
+  "2": {
+    "question": "How far away is your planet from its star?",
+    "type": "slider",
+    "answers": ["pl_orbsmax"],
+    "meaning": ["what", "each", "answer", "means"]
+  },
+  "3": {
+    "question": "What do you want the orbital period of your planet to be?",
+    "type": "slider",
+    "answers": ["pl_orbper"],
+    "meaning": ["what", "each", "answer", "means"]
+  }
+}
