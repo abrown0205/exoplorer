@@ -7,12 +7,14 @@ from .navigation.routes import QUIZ_ROUTE, EXAMPLES_ROUTE, EXAMPLE_PLANET_ROUTE
 style = {
     "font_family": "CarvingSoft",
     rx.heading: {
-        "font_family": "Zekton",
+        "font_family": "Orbitron",
+        "font_weight": "400"
     }
 }
 
 app = rx.App(
     stylesheets=[
+        "https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap",
         "/fonts/myfont.css",
     ],
     style=style,

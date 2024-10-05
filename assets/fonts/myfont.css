@@ -1,15 +1,4 @@
 @font-face {
-    font-family: Zekton;
-    src: url("/fonts/zekton.otf") format("opentype");
-}
-
-@font-face {
-    font-family: Zekton;
-    font-weight: bold;
-    src: url("/fonts/zekton.otf") format("opentype");
-}
-
-@font-face {
     font-family: CarvingSoft;
     src: url("/fonts/MADECarvingSoftPERSONALUSE-Regular.otf") format("opentype");
 }
