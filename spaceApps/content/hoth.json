@@ -1,0 +1,12 @@
+{
+  "name": "Hoth",
+  "description": "Hoth is a white ice ball exoplanet located at a distance of 0.15 AU from its star, taking 526 Earth days to complete an orbit. With an average temperature of 243 Kelvin, the planet is likely covered in thick ice and may possess a cold, desolate surface. At 0.6 times the size of Earth, Hoth is smaller but potentially quite dense. The frozen environment suggests little to no liquid water, though subsurface oceans are a possibility. Its distant orbit and icy conditions make it a target for studies on cold exoplanetary atmospheres.",
+  "distance": 15406,
+  "mass": 0.001,
+  "radius": 0.6,
+  "semimajor_axis": 0.15,
+  "orbital_period": 526,
+  "temperature": 243,
+  "picture_path": "../../examples/Hoth.jpg",
+  "matched_exoplanet_name": "OGLE-2005-BLG-390L b"
+}

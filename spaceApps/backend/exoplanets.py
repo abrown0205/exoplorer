@@ -158,6 +158,6 @@ def find_exoplanet_by_name(name:str):
     return data
 
 def get_example_exoplanet(name: str):
-    file_path = os.path.abspath(f"spaceApps/content/examples/{name}.json")
+    file_path = os.path.abspath(f"spaceApps/content/{name}.json")
     with open(file_path, 'r') as file:
         return json.load(file)

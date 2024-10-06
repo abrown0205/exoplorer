@@ -1,0 +1,12 @@
+{
+  "name": "Pandora",
+  "description": "Pandora is a blue super-Earth orbiting its star at a distance of 1.5 AU, completing a remarkably short orbit of just 2 Earth days. The planet’s size, at 0.88 times that of Earth, suggests a rocky surface with an atmospheric composition that could contribute to its blue appearance. With an average temperature of 300 Kelvin, Pandora exists in a temperate zone, making it a potential candidate for habitability. However, its extremely fast orbital period indicates it is tidally locked, with one side constantly facing the star. The unique conditions of Pandora make it an intriguing subject for further exploration.",
+  "distance": "1.3",
+  "mass": "0.002",
+  "radius": "0.88",
+  "semimajor_axis": "1.5",
+  "orbital_period": "2",
+  "temperature": "300",
+  "picture_path": "../../examples/Pandora.jpg",
+  "matched_exoplanet_name": "Kepler-442 b"
+}

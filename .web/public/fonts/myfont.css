@@ -1,0 +1,21 @@
+@font-face {
+    font-family: CarvingSoft;
+    src: url("/fonts/MADECarvingSoftPERSONALUSE-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: CarvingSoft;
+    font-weight: regular;
+    src: url("/fonts/MADECarvingSoftPERSONALUSE-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: CarvingSoftThin;
+    src: url("/fonts/MADECarvingSoftPERSONALUSE-Thin.otf") format("opentype");
+}
+
+@font-face {
+    font-family: CarvingSofThint;
+    font-weight: regular;
+    src: url("/fonts/MADECarvingSoftPERSONALUSE-Thin.otf") format("opentype");
+}
