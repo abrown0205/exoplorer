@@ -20,7 +20,8 @@ def bio_box(team_member: dict[str, str]) -> rx.Component:
             spacing="2",
             padding="5%"
         ),
-        rx.text(team_member["bio"]),
+        rx.text(team_member["bio"],
+                text_align="center"),
         padding="20px",
         border="1px solid #ccc",
         border_radius="20px",

@@ -85,11 +85,7 @@ class ExoplanetState(rx.State):
             yield NavState.set_current_as_back()
 
     def load_matched_exoplanet(self):
-        print("in exoplanet load")
-        print(self.matched_exoplanet["name"])
         self.current_exoplanet = self.matched_exoplanet
-        print(self.current_exoplanet["name"])
-        print(self.matched_exoplanet["name"])
 
     def get_example_exoplanet(self, exoplanet_name:str):
         data = find_exoplanet_by_name(exoplanet_name)

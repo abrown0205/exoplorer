@@ -1,9 +1,5 @@
 import reflex as rx
 from ..components.base_page import base_page
-
-
-import reflex as rx
-from ..components.base_page import base_page
 from .. import navigation
 
 PAGES : list[list[str]]= [[navigation.routes.GENERATE_ROUTE, "Build your own exoplanet!"], [navigation.routes.EXPLORE_ROUTE, "Search and filter exoplanets!"],
