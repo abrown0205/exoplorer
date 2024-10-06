@@ -128,8 +128,7 @@ def find_similar_exoplanet(questions, selectedAnswers):
     return data
 
 def find_exoplanet_by_name(name:str):
-    matched_planet = (df[df['pl_name'] == "11 Com b"]).to_dict
-    print(matched_planet)
+    matched_planet = df[df['pl_name'] == name].iloc[0].to_dict()
 
     data = {}
     data["name"] = matched_planet['pl_name']

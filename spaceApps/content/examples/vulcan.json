@@ -6,14 +6,7 @@
   "radius": 0.33,
   "semimajor_axis": 0.15,
   "orbital_period": 412,
-  "eccentricity": 0.0,
-  "inclination": 0.0,
   "temperature": 338,
-  "density": 0.0,
-  "star_mass": 0.0,
-  "star_radius": 0.0,
-  "star_temp": 0,
-  "star_metallicity": 0,
   "picture_path": "../../examples/Vulcan.jpg",
   "matched_exoplanet_name": "HD 219134 b"
 }

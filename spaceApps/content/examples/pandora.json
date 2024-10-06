@@ -1,19 +1,12 @@
 {
   "name": "Pandora",
-  "description": "Description/Data still needed",
-  "distance": 16250,
-  "mass": 0.001,
-  "radius": 0.33,
-  "semimajor_axis": 0.15,
-  "orbital_period": 412,
-  "eccentricity": 0.0,
-  "inclination": 0.0,
-  "temperature": 338,
-  "density": 0.0,
-  "star_mass": 0.0,
-  "star_radius": 0.0,
-  "star_temp": 0,
-  "star_metallicity": 0,
+  "description": "A lush, habitable moon of the gas giant Polyphemus, Pandora is known for its rich biodiversity, floating mountains, and the Na'vi, a humanoid indigenous species. It features bioluminescent flora and fauna and has a complex ecosystem.",
+  "distance": "1.3",
+  "mass": "0.002",
+  "radius": "0.88",
+  "semimajor_axis": "1.5",
+  "orbital_period": "2",
+  "temperature": "300",
   "picture_path": "../../examples/Pandora.jpg",
-  "matched_exoplanet_name": "Kepler-442b"
+  "matched_exoplanet_name": "Kepler-442 b"
 }

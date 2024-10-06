@@ -11,7 +11,6 @@ def base_page(child: rx.Component, *args, **kwargs) -> rx.Component:
                padding_bottom="10%",
                flex="1",
                id="content-area"),
-        footer(),
         height="100vh",
         display="flex",
         flex_direction="column",

@@ -12,7 +12,7 @@ def generate():
                 rx.vstack(
                     rx.link(rx.heading("Generate an Exoplanet"),
                             href=QUIZ_ROUTE,
-                            margin="auto"),
+                            text_align="center"),
                     rx.text("Take a short quiz to generate your own exoplanet",
                             text_align="center")
                 ),

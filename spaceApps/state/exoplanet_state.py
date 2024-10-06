@@ -59,7 +59,6 @@ class ExoplanetState(rx.State):
     def get_exoplanet(self):
         data = find_similar_exoplanet(self.questions, self.selectedAnswers)
         self.current_exoplanet["name"] = data["name"]
-        self.current_exoplanet["description"] = data["description"]
         self.current_exoplanet["host_star"] = data["host_star"]
         self.current_exoplanet["discovery_method"] = data["discovery_method"]
         self.current_exoplanet["discovery_year"] = data["discovery_year"]
@@ -89,7 +88,6 @@ class ExoplanetState(rx.State):
     def get_example_exoplanet(self, exoplanet_name:str):
         data = find_exoplanet_by_name(exoplanet_name)
         self.current_exoplanet["name"] = data["name"]
-        # self.current_exoplanet["description"] = data["description"]
         self.current_exoplanet["host_star"] = data["host_star"]
         self.current_exoplanet["discovery_method"] = data["discovery_method"]
         self.current_exoplanet["discovery_year"] = data["discovery_year"]
@@ -179,7 +177,7 @@ class ExoplanetState(rx.State):
             compare_to_earth = f'{self.current_exoplanet["name"]} has a smaller radius than Earth, with a radius of {self.current_exoplanet["radius"]} Earth Radii.'
         elif self.current_exoplanet["radius"] >= 0.9 and self.current_exoplanet["radius"] <= 1.1:
             compare_to_earth = f'{self.current_exoplanet["name"]} has a similar radius to Earth, with a radius of {self.current_exoplanet["radius"]} Earth Radii.'
-        elif self.current_exoplanet["radius"] > 2:
+        elif self.current_exoplanet["radius"] > 10:
             compare_to_earth = f'{self.current_exoplanet["name"]} has a much larger radius than Earth, with a radius of {self.current_exoplanet["radius"]} Earth Radii.'
         elif self.current_exoplanet["radius"] > 1:
             compare_to_earth = f'{self.current_exoplanet["name"]} has a larger radius than Earth, with a radius of {self.current_exoplanet["radius"]} Earth Radii.'

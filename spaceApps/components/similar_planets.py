@@ -32,7 +32,8 @@ def similar_planets_box():
             padding="5%",
             border="solid",
             border_color="gray",
-            border_radius="10px"
+            border_radius="10px",
+            width="100%"
         ),
         margin_top="10%"
     )

@@ -12,17 +12,17 @@ def meet_an_exoplanet():
             rx.heading(ExoplanetState.current_exoplanet["name"],
                        text_align="center"),
             rx.flex(
-                rx.cond(ExoplanetState.current_exoplanet["picture_path"] != "",
-                        rx.vstack(
-                            rx.image(src=ExoplanetState.current_exoplanet["picture_path"],
-                                     min_width="250px",
-                                     height="auto", ),
-                            rx.text("This image is artist generated.",
-                                    font_size="8px",
-                                    text_align="center"),
-                            align="center"
-                            ),
-                        ),
+                # rx.cond(ExoplanetState.current_exoplanet["picture_path"] != "",
+                #         rx.vstack(
+                #             rx.image(src=ExoplanetState.current_exoplanet["picture_path"],
+                #                      min_width="250px",
+                #                      height="auto", ),
+                #             rx.text("This image is artist generated.",
+                #                     font_size="8px",
+                #                     text_align="center"),
+                #             align="center"
+                #             ),
+                #         ),
                 rx.text(ExoplanetState.generate_description),
                 spacing="7",
                 padding="5%",
