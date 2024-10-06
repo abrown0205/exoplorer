@@ -16,7 +16,7 @@
   "2": {
     "question": "What is the average surface temperature of your exoplanet?",
     "type": "slider",
-    "answers": [-200, 3000],
+    "answers": [0, 3000],
     "meaning": "pl_eqt",
     "unit": "Kelvin"
   },

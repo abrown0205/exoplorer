@@ -19,7 +19,7 @@ app = rx.App(
     ],
     style=style,
     theme=rx.theme(
-        appearance="light",
+        appearance="dark",
         has_background=False,
         radius="large",
         accent_color="indigo",

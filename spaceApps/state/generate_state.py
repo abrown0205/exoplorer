@@ -77,3 +77,7 @@ class GenerateState(rx.State):
     def updated_description(self) -> str:
         return self.generated_data["description"].replace("{name}", self.generated_name)
 
+    def load_existing_planet(self):
+        print("in generate load")
+        yield ExoplanetState.load_matched_exoplanet()
+        return NavState.to_my_exo()

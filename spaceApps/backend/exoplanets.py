@@ -1,7 +1,6 @@
 import os, json
 import pandas as pd
 from dotenv import load_dotenv
-from json import JSONDecodeError
 
 from openai import OpenAI
 
@@ -68,7 +67,6 @@ def generate_exoplanet(questions, selectedAnswers):
 
 
     generated_data["picture_path"] = image_response.data[0].url
-    # generated_data["picture_path"] = "../../test_exoplanet.jpeg"
 
     return generated_data
 
@@ -80,13 +78,20 @@ def find_similar_exoplanet(questions, selectedAnswers):
             col_name = questions[question]["meaning"]
             input_dict[col_name] = selectedAnswers[question]
 
-    filtered_data = df[input_dict.keys()].copy()
+    condition_eqt = df['pl_eqt'].between(0, 3000)
+    condition_rade = df['pl_rade'].between(0, 90)
+    condition_orbsmax = df['pl_orbsmax'].between(0.1, 100)
+    condition_orbper = df['pl_orbper'].between(0.1, 10000)
+
+    filtered_df = df[condition_eqt & condition_rade & condition_orbsmax & condition_orbper]
+    filtered_data = filtered_df[input_dict.keys()].copy()
+
     normalized_data = (filtered_data - filtered_data.min()) / (filtered_data.max() - filtered_data.min())
 
     input_values = {}
     for key, value in input_dict.items():
-        if key in df.columns:
-            min_val, max_val = df[key].min(), df[key].max()
+        if key in filtered_df.columns:
+            min_val, max_val = filtered_df[key].min(), filtered_df[key].max()
             input_values[key] = (value - min_val) / (max_val - min_val)
 
     similarity_scores = []
@@ -97,9 +102,9 @@ def find_similar_exoplanet(questions, selectedAnswers):
                 similarity += 1 - abs(planet[key] - value)
         similarity_scores.append(similarity / len(input_values))
 
-    df['similarity_score'] = similarity_scores
+    filtered_df['similarity_score'] = similarity_scores
 
-    most_similar_planet = df.loc[df['similarity_score'].idxmax()]
+    most_similar_planet = filtered_df.loc[filtered_df['similarity_score'].idxmax()]
 
     most_similar_planet.to_dict()
 

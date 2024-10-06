@@ -1,6 +1,10 @@
 import reflex as rx
 from ..components.base_page import base_page
 from ..components.bio_box import bio_box, card_box, method_box, definitions_box
+import reflex as rx
+from ..components.base_page import base_page
+from ..components.bio_box import bio_box, card_box, method_box, definitions_box
+
 
 METHODS : list[dict[str, str]]= [
     {
@@ -27,6 +31,7 @@ METHODS : list[dict[str, str]]= [
         "Name": "Astrometry",
         "Text": "This method has roots in the early 19th century, with Friedrich Bessel laying the groundwork. It involves measuring the precise movements of a star in the sky. If a star wobbles due to an orbiting planet, it can reveal the planet\s existence. Recent advancements, especially with the Gaia mission, have enhanced this method’s effectiveness.",
         "picture_path": "https://science.nasa.gov/wp-content/uploads/2023/09/astrometry.mp4"
+
     },
     {
         "Name": "Timing Variations Method",
@@ -64,51 +69,79 @@ definitions: dict[str, str] = {
 
 def learn():
     return base_page(
-        rx.container(
-            rx.heading("Learn About Exoplanets!", size="8",
-                text_align="center",
-                margin_bottom="2%"),
-            rx.box(
-                card_box(about),
-                margin_bottom= "1em",
-                width="100%",
-                size = "10"
-            ),
-            rx.heading("Exoplanet Discovery Methods",
-                size="6",
-                text_align="center",
-                margin="2%",),
-            rx.grid(
-                *[method_box(method) for method in METHODS],  # Use method_box here
-                grid_template_columns=[
-                    "repeat(2, 1fr)"
-                ],
-                grid_auto_flow="row",
-                spacing="7",
-                margin_bottom="1em",
-                justify_items="center",  
-                justify_content="center",
-            ),
-            rx.heading("Important Exoplanet Definitions",
-                size="6",
-                text_align="center",
-                margin="2%",
+        rx.box(
+            rx.video(
+                url = "https://github.com/user-attachments/assets/8a413b5d-ce7a-4a18-a2de-b151f4407f9c",
+                # url = "https://www.youtube.com/watch?v=feq6MOg3qpA",
+                playing=True,
+                loop=True,
+                controls=False,
+                muted=True,
+                width="120vw",
+                height="120vh",
+                object_fit="cover",
+                position="fixed",
+                top="-10vh",
+                left="-10vw",
+                z_index="-1",
             ),
             rx.box(
-                definitions_box()
+                background="rgba(0, 0, 0, 0.7)",
+                position="fixed",
+                top="0",
+                left="13%",
+                width="74vw",
+                height="100vh",
+                z_index="-1",  # Place overlay above video
             ),
-            # rx.box(
-            #     card_box(definitions),
-            #     width = "100%",
-            #     margin_bottom= "1em",
-            # ),
-            rx.heading("Timeline of Important Events",
-                size="6",
-                text_align="center",
-                margin="2%",),
-            rx.box(
-                rx.image(src = "../../timeline.png", style={"position": "relative", "left": "-135px", "min-width": "1400px", "border-radius": "5px"})
+            rx.container(
+                rx.heading("Learn About Exoplanets!", size="8",
+                    text_align="center",
+                    margin_bottom="2%"),
+                rx.box(
+                    card_box(about),
+                    margin_bottom= "1em",
+                    width="100%",
+                    size = "10"
+                ),
+                rx.heading("Exoplanet Discovery Methods",
+                    size="6",
+                    text_align="center",
+                    margin="2%",),
+                rx.grid(
+                    *[method_box(method) for method in METHODS],  # Use method_box here
+                    grid_template_columns=[
+                        "repeat(2, 1fr)"
+                    ],
+                    grid_auto_flow="row",
+                    spacing="7",
+                    margin_bottom="1em",
+                    justify_items="center",
+                    justify_content="center",
+                ),
+                rx.heading("Important Exoplanet Definitions",
+                    size="6",
+                    text_align="center",
+                    margin="2%",
+                ),
+                rx.box(
+                    definitions_box()
+                ),
+                # rx.box(
+                #     card_box(definitions),
+                #     width = "100%",
+                #     margin_bottom= "1em",
+                # ),
+                rx.heading("Timeline of Important Events",
+                    size="6",
+                    text_align="center",
+                    margin="2%",),
+                rx.box(
+                    rx.image(src = "../../timeline.png", style={"position": "relative", "left": "-135px", "min-width": "1400px", "border-radius": "5px"})
+                ),
+                size = "10",
             ),
-            size = "10"
+            width="100vw",  # Ensure the main box is full width
+            height="100vh",
         )
     )

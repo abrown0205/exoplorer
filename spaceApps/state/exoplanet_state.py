@@ -1,4 +1,6 @@
 import reflex as rx
+from alembic.command import current
+from anyio import current_effective_deadline
 
 from spaceApps.backend.exoplanets import find_similar_exoplanet, find_exoplanet_by_name
 from spaceApps.navigation import NavState
@@ -83,7 +85,11 @@ class ExoplanetState(rx.State):
             yield NavState.set_current_as_back()
 
     def load_matched_exoplanet(self):
+        print("in exoplanet load")
+        print(self.matched_exoplanet["name"])
         self.current_exoplanet = self.matched_exoplanet
+        print(self.current_exoplanet["name"])
+        print(self.matched_exoplanet["name"])
 
     def get_example_exoplanet(self, exoplanet_name:str):
         data = find_exoplanet_by_name(exoplanet_name)
@@ -137,6 +143,7 @@ class ExoplanetState(rx.State):
             ["Orbital Period (days)", "The time it takes for this planet to complete one full orbit around its host star in days", self.current_exoplanet["orbital_period"]],
             ["Distance From Earth (pc)", "How far this planet is from Earth, in parsecs (1pc=~3.26 lightyears)", self.current_exoplanet["distance"]],
             ["Semi-Major Axis (AU)", "The average distance between this planet and its host star, typically measured in astronomical units (AU). An astronomical unit (AU) is defined as the average distance from the Earth to the Sun.", self.current_exoplanet["semimajor_axis"]],
+            ["Equilibrium Temperature (K)", "The temperature of this planet", self.current_exoplanet["temperature"]],
         ]
 
 

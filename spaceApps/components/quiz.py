@@ -27,5 +27,13 @@ def quiz():
                               )
                     ),
             justify="end"
+        ),
+        rx.dialog.root(
+            rx.dialog.content(
+                rx.dialog.title("Finding your exoplanet...",
+                                text_align="center"),
+                rx.image(src="../../loading_screen.gif")
+            ),
+        open=State.loading,
         )
     )

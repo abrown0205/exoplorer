@@ -14,6 +14,7 @@ class State(rx.State):
     questions: dict = {}
     curQuestionNum: int = 0
     selectedAnswers: dict = {}
+    loading: bool = False
 
     """Quiz State Vars"""
     @rx.var
@@ -105,11 +106,13 @@ class State(rx.State):
 
 
     def handle_submit(self):
-        print(self.selectedAnswers)
-
+        self.loading = True
         yield GenerateState.set_questions_and_answers(self.questions, self.selectedAnswers)
 
         self.curQuestionNum = 0
         self.selectedAnswers = {}
 
         return GenerateState.get_generated_exoplanet()
+
+    def reset_loading(self):
+        self.loading = False

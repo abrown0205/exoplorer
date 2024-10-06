@@ -33,9 +33,6 @@ def navbar() -> rx.Component:
                     navbar_link("Explore", navigation.routes.EXPLORE_ROUTE),
                     navbar_link("Learn", navigation.routes.LEARN_ROUTE),
                     navbar_link("About", navigation.routes.ABOUT_ROUTE),
-                    rx.color_mode.button(
-                        style={"padding": "0", "height": "1.15em", "width": "1.15em"},
-                    ),
                     align="center",
                     justify="end",
                     spacing="5",
@@ -72,9 +69,6 @@ def navbar() -> rx.Component:
                         rx.menu.item("Explore", on_click=navigation.NavState.to_explore),
                         rx.menu.item("Learn", on_click=navigation.NavState.to_learn),
                         rx.menu.item("About", on_click=navigation.NavState.to_about),
-                        rx.color_mode.button(
-                            style={"padding": "0", "height": "1.15em", "width": "1.15em", "margin": "auto"},
-                        ),
                     ),
                     justify="end",
                 ),
